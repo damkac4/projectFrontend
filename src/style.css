@@ -1,0 +1,214 @@
+
+
+*{
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+@media (prefers-reduced-motion: no-preference){
+    .nav-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+nav{
+    height: 70px;
+    display: flex;
+    padding: 15px 36px;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.1);
+    font-size: 35px;
+    background-color:white;
+    position: sticky; top: 0;
+    z-index: 10000;
+    margin-bottom: 20px;
+
+}
+
+.card-image {
+    width: 250px;
+    margin: 20px;
+}
+.card {
+    display: flex;
+    align-items: center;
+    height: 220px;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.1);
+    border: 1px solid rgb(220, 221, 224);
+    border-radius: 4px ;
+    margin-bottom: 10px;
+
+}
+.car-list {
+    width: 90%;
+    margin-left: 60px;
+    margin-top: 20px;
+}
+.amount-cards{
+    margin-left: 60px;
+    margin-top: 20px;
+    font-size: 20px;
+
+}
+
+.form  {
+     display:grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(2,50px) ;
+    grid-gap: 10px;
+    margin:5px;
+    background-color: #F0F0F0;
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+ }
+.text-link{
+    text-decoration: none;
+    color: black;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: black;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: black;
+}
+
+.scroll-box {
+    overflow-y: scroll;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+
+
+
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swipers{
+
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 50%;
+    background: #000;
+    color: #000;
+    justify-content: center;
+}
+
+
+.swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.swiper-slide {
+    background-size: cover;
+    background-position: center;
+}
+
+.mySwiper2 {
+    height: 80%;
+    width: 100%;
+}
+
+.mySwiper {
+    margin-top: 10px;
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+
+}
+.upper{
+    display: flex;
+    margin-left: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.upper-data{
+    margin-left: 150px;
+
+}
+hr{
+    border-width:2px;
+    width: 1000px;
+    margin-left:150px;
+}
+.lower-h1{
+    margin-left:150px;
+
+
+}
+.lower{
+    display: flex;
+    justify-content: center;
+    height: 50%;
+
+}
+.lower-data{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,50px) ;
+    grid-gap: 70px;
+}
