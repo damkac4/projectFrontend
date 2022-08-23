@@ -1,6 +1,6 @@
 
 import {useParams} from "react-router-dom";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -16,7 +16,7 @@ import axios from "axios";
 
 export default function CarPage(){
 
-    const [dataCar, setdataCar] = useState({ nadwozie:null,
+    const [dataCar, setdataCar] = useState({
         cena: 0,
         generacja: {id: 0, nazwa: ''},
         id: 0,
@@ -36,12 +36,7 @@ export default function CarPage(){
             .then(data => setdataCar(data.data))
     },[]);
 
-    console.log(dataCar)
-    function data(dataCar){
-        if(dataCar){
-            return JSON.parse(JSON.stringify(dataCar.marka.nazwa))
-        }
-    }
+
     const images = []
     for (let i = 1; i<=6;i++){
         images.push(
@@ -89,14 +84,22 @@ export default function CarPage(){
                 className="mySwiper">{thumbImages}</Swiper>
 
         </div>
-            <div className="upper-data">
-                <p>DANE</p>
-                <p>DANE</p>
-                <p>DANE</p>
-                <p>DANE</p>
-                <p>DANE</p>
-                <p>DANE</p>
-                <p>DANE</p>
+            <div className="upper-data-upper">
+                <div>
+                <h1>{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))} { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</h1>
+                <ul>
+                    <li>{JSON.parse(JSON.stringify(dataCar.rok))}</li>
+                    <li>{ JSON.parse(JSON.stringify(dataCar.przebieg))} km</li>
+                    <li>{JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))}</li>
+                    <li>{JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</li>
+                </ul>
+                </div>
+                <div className="upper-data-lower">
+                    <p>Właściciel</p>
+                    <p>mail@wp.pl</p>
+                    <p>666 666 666</p>
+                    <p>{ JSON.parse(JSON.stringify(dataCar.miejscowosc))}</p>
+                </div>
             </div>
         </div>
 
