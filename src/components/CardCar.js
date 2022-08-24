@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-export default function Card(props){
+export default function CardCar(props){
 
     return(
         <Link to={`/${props.id}`} target="_blank" rel="noopener noreferrer" className="text-link">

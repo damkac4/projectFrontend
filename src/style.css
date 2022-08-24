@@ -22,17 +22,46 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.footer-car {
+    width: 140px;
+    height: 50px;
+    animation-name : mymove;
+    animation-iteration-count : infinite;
+    animation-direction : alternate;
+    animation-duration : 5s;
+}
+
+@keyframes mymove {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(1380px);
+    }
+
+}
+
 nav{
     height: 70px;
     display: flex;
     padding: 14px 32px;
-    box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.1);
+    box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.2);
     font-size: 35px;
     background-color:white;
     position: sticky; top: 0;
     z-index: 10000;
     margin-bottom: 20px;
 
+}
+footer{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.8);
+    bottom: 0;
+    width: 100%;
+    margin-top: 100px;
 }
 
 .nav-left{
@@ -120,6 +149,7 @@ nav{
     width: 90%;
     margin-left: 60px;
     margin-top: 20px;
+    min-height: 500px;
 }
 .amount-cards{
     margin-left: 60px;
@@ -205,6 +235,8 @@ nav{
     background: #000;
     color: #000;
     justify-content: center;
+    margin-bottom: 10px;
+    min-width: 500px;
 }
 
 
@@ -257,36 +289,38 @@ nav{
 .upper-data-upper{
     margin-left: 150px;
     width: 30%;
-
-
 }
+
 .upper-data-lower{
     margin-top: 50px;
     border: 2px solid black;
     height: 50%;
     padding-left: 50px;
+    margin-bottom: 50px;
 
 }
-hr{
+
+.hr-lower{
     border-width:2px;
-    width: 1000px;
+    width: 1200px;
     margin-left:150px;
 }
 .lower-h1{
     margin-left:150px;
-
-
 }
 .lower{
     display: flex;
+
     justify-content: center;
     height: 50%;
     margin-bottom: 100px;
 
+
 }
 .lower-data{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(2,50px) ;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(1,50px) ;
     grid-gap: 70px;
+    margin-bottom: 100px;
 }

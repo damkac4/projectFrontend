@@ -7,12 +7,11 @@ import Main from "./Main";
 
 export default function App() {
 
-
     return (
         <div >
             <Navbar/>
             <Main/>
-            {/*<Footer/>*/}
+            <Footer/>
         </div>
     )
 

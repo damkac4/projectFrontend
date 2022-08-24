@@ -1,21 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {Multiselect} from "multiselect-react-dropdown";
 import axios from "axios";
-import Card from "./Card";
+import CardCar from "./CardCar";
 
 
-export default function Content(){
+export default function MainPage(){
 
     const years = []
     for(let i = 1970;i < 2023;i++) years.push(i)
     const prices = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000,
         50000, 65000, 80000, 100000, 200000, 500000, 1000000]
+    const kms = [20000, 35000, 50000, 75000, 100000, 125000, 150000, 175000, 200000, 250000 ]
 
 
     const [dataCar, setdataCar] = useState([])
 
     const cards = dataCar.map(item =>{
-        return (<Card
+        return (<CardCar
             key = {item.id}
             id = {item.id}
             nadwozie = {item.nadwozie}
@@ -60,7 +61,7 @@ export default function Content(){
         axios.get("http://localhost:8080/n")
             .then(data => setdataNadwozie(data.data))},[]);
 
-
+    const [isDisabledMarka, setIsDisabledMarka] = useState(false);
     const [dataMarka, setdataMarka] = useState([])
 
     useEffect(function () {
@@ -150,6 +151,7 @@ return(
             }
             options={dataMarka}
             singleSelect={true}
+            disable={isDisabledMarka}
             showCheckbox
             placeholder="Marka pojazdu"
         />
@@ -158,6 +160,7 @@ return(
             displayValue="nazwa"
             onRemove={function noRefCheck(e){
                 setdataModelSelected(e);
+                setIsDisabledMarka(false);
                 setFormData(prevState =>({
                     ...prevState,
                     model: null,
@@ -168,6 +171,7 @@ return(
             }}
             onSelect={function noRefCheck(e){
                 setdataModelSelected(e);
+                setIsDisabledMarka(true);
                 setFormData(prevState =>({
                     ...prevState,
                     model: e[0]
@@ -182,12 +186,14 @@ return(
         <Multiselect
             displayValue="nazwa"
             onRemove={function noRefCheck(){
+                setIsDisabledModel(false)
                 setFormData(prevState =>({
                     ...prevState,
                     generacja: null
                 }) )
             }}
             onSelect={function noRefCheck(e){
+                setIsDisabledModel(true)
                 setFormData(prevState =>({
                     ...prevState,
                     generacja:e[0]
@@ -305,7 +311,7 @@ return(
                     przebiegOd: parseInt(e)
                 }))
             }}
-            options={["1","2","3"]}
+            options={kms}
             placeholder="Przebieg od"
             singleSelect={true}
 
@@ -325,7 +331,7 @@ return(
                 }))
 
             }}
-            options={["1","2","3"]}
+            options={kms}
             placeholder="Przebieg do"
             singleSelect={true}
 

@@ -13,7 +13,7 @@ export default function Navbar(){
             </Link>
             </div>
             <div className="nav-right">
-            <Link style={{ textDecoration: 'none' }} to="/dashboard">
+            <Link style={{ textDecoration: 'none' }} to="/add">
                 <button className="nav-button" type="button">
                    Dodaj ogłoszenie
                 </button>

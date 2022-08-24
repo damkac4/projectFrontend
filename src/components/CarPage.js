@@ -20,7 +20,7 @@ export default function CarPage(){
         cena: 0,
         generacja: {id: 0, nazwa: ''},
         id: 0,
-        marka: {id: 0, nazwa: ''},
+        marka: {id: 0, nazwa: '', kraj:''},
         miejscowosc: "",
         model: {id: 0, nazwa: ''},
         nadwozie: {id: 0, typ: ''},
@@ -28,6 +28,11 @@ export default function CarPage(){
         pojemnosc: 0,
         przebieg: 0,
         rok: 0,
+        wlasciciel: {id:0, mail:'', telefon:'', imie:''},
+        moc:0,
+        kolor:'',
+        stan:'',
+        spalanie:0
     })
 
     let params = useParams();
@@ -86,7 +91,7 @@ export default function CarPage(){
         </div>
             <div className="upper-data-upper">
                 <div>
-                <h1>{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))} { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</h1>
+                <h2>{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))} { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</h2>
                 <ul>
                     <li>{JSON.parse(JSON.stringify(dataCar.rok))}</li>
                     <li>{ JSON.parse(JSON.stringify(dataCar.przebieg))} km</li>
@@ -94,35 +99,53 @@ export default function CarPage(){
                     <li>{JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</li>
                 </ul>
                 </div>
+                <h1>{ JSON.parse(JSON.stringify(dataCar.cena))} zł</h1>
+                <hr />
                 <div className="upper-data-lower">
-                    <p>Właściciel</p>
-                    <p>mail@wp.pl</p>
-                    <p>666 666 666</p>
+                    <p>{JSON.parse(JSON.stringify(dataCar.wlasciciel.imie))}</p>
+                    <p>{JSON.parse(JSON.stringify(dataCar.wlasciciel.mail))}</p>
+                    <p>{JSON.parse(JSON.stringify(dataCar.wlasciciel.telefon))}</p>
                     <p>{ JSON.parse(JSON.stringify(dataCar.miejscowosc))}</p>
                 </div>
             </div>
         </div>
 
-            <hr/>
+
+
+            <hr className="hr-lower"/>
             <h1 className="lower-h1">Szczegóły</h1>
         <div className="lower">
+
+
             <div className="lower-data">
-                <div className="lower-left">
-                    <p>Przebieg:{ JSON.parse(JSON.stringify(dataCar.przebieg))}</p>
+                <div>
+
                     <p>Generacja:{ JSON.parse(JSON.stringify(dataCar.generacja.nazwa))}</p>
                     <p>Marka:{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))}</p>
-                    <p>Miejscowość:{ JSON.parse(JSON.stringify(dataCar.miejscowosc))}</p>
+                    <p>Nadwozie:{JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</p>
                     <p>Model:{ JSON.parse(JSON.stringify(dataCar.model.nazwa))}</p>
+                </div>
+                <div>
+                    <p>Kolor: { JSON.parse(JSON.stringify(dataCar.kolor))}</p>
+                    <p>Moc: { JSON.parse(JSON.stringify(dataCar.moc))} KM</p>
+                    <p>Paliwo: {JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))}</p>
+                    <p>Spalanie:{ JSON.parse(JSON.stringify(dataCar.spalanie))}l/100km</p>
+
+                </div>
+                <div>
+                    <p>Przebieg:{ JSON.parse(JSON.stringify(dataCar.przebieg))}</p>
+                    <p>Generacja:{ JSON.parse(JSON.stringify(dataCar.generacja.nazwa))}</p>
+                    <p>Pojemność:{JSON.parse(JSON.stringify(dataCar.pojemnosc))}</p>
+                    <p>Stan: {JSON.parse(JSON.stringify(dataCar.stan))}</p>
 
                 </div>
 
-                <div className="lower-right">
-
-                    <p>Nadwozie:{JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</p>
+                <div >
+                    <p>Kraj pochodzenia:{ JSON.parse(JSON.stringify(dataCar.marka.kraj))}  </p>
                     <p>Rodzaj paliwa:{JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))}</p>
-                    <p>Pojemność:{JSON.parse(JSON.stringify(dataCar.pojemnosc))}</p>
-                    <p>Przebieg:{JSON.parse(JSON.stringify(dataCar.przebieg))}</p>
-                    <p>Rok produkcji:{JSON.parse(JSON.stringify(dataCar.rok))}</p>
+                    <p>Przebieg:{ JSON.parse(JSON.stringify(dataCar.przebieg))}</p>
+                    <p>Rok produkcji: {JSON.parse(JSON.stringify(dataCar.rok))}</p>
+
                 </div>
         </div>
         </div>
