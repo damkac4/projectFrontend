@@ -45,6 +45,7 @@ body {
 nav{
     height: 70px;
     display: flex;
+    width: 100%;
     padding: 14px 32px;
     box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.2);
     font-size: 35px;
@@ -72,12 +73,7 @@ footer{
 .nav-right{
     position: absolute;
     right: 20px;
-
-
-
-
 }
-
 
 .nav-button {
 
