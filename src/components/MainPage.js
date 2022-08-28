@@ -46,8 +46,6 @@ export default function MainPage(){
         przebiegDo:1000000
     })
 
-
-
     useEffect(function () {
         axios.post("http://localhost:8080/s", formData)
             .then(data => setdataCar(data.data))
@@ -286,7 +284,6 @@ return(
                 }) )
             }}
             onSelect={function noRefCheck(e){
-                console.log(e[0])
                 setFormData(prevState =>({
                     ...prevState,
                     paliwo: e[0]
