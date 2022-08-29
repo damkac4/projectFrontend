@@ -8,17 +8,17 @@ export default function AddCarPage(){
     const [files, setfiles] = useState([])
     const [DataCar, setDataCar] = useState({
         cena: 0,
-        generacja: {id: 0, nazwa: ''},
-        id: 0,
-        marka: {id: 0, nazwa: '', kraj:''},
+        id:0,
+        generacja: {id: 1, nazwa: ''},
+        marka: {id: 1, nazwa: '', kraj:''},
         miejscowosc: "",
-        model: {id: 0, nazwa: ''},
-        nadwozie: {id: 0, typ: ''},
-        paliwo: {id: 0, rodzaj: ''},
+        model: {id: 1, nazwa: ''},
+        nadwozie: {id: 1, typ: ''},
+        paliwo: {id: 1, rodzaj: ''},
         pojemnosc: 0,
         przebieg: 0,
         rok: 0,
-        wlasciciel: {mail:'', telefon:'', imie:''},
+        wlasciciel: {id:0, mail:'', telefon:'', imie:''},
         moc:0,
         kolor:'',
         stan:'',
@@ -181,9 +181,10 @@ export default function AddCarPage(){
         }
         console.log(DataCar)
     }
+
+
     function onClickHandler(){
         const formData = new FormData();
-        formData.append('ogloszenie', DataCar)
         formData.append('images', files.image1);
         formData.append('images', files.image2);
         formData.append('images', files.image3);
@@ -191,11 +192,22 @@ export default function AddCarPage(){
         formData.append('images', files.image5);
         formData.append('images', files.image6);
 
-        axios.post("http://localhost:8080/upload", formData)
+
+        axios.post("http://localhost:8080/uploadData", DataCar)
             .then(res => {
-                console.log(res.data);
                 alert("File uploaded successfully.")
-            })}
+            })
+
+        // axios.post("http://localhost:8080/uploadImages", formData)
+        //     .then(res => {
+        //         console.log(res.data);
+        //         alert("File uploaded successfully.")
+        //     })
+
+
+    }
+
+
 
     return(
         <div>
