@@ -154,7 +154,8 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
-                    ...prevState,
+                    telefon: prevState.wlasciciel.telefon,
+                    mail: prevState.wlasciciel.mail,
                     imie: e.target.value}
             }))
         }
@@ -162,7 +163,8 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
-                    ...prevState,
+                    imie:prevState.wlasciciel.imie,
+                    telefon: prevState.wlasciciel.telefon,
                     mail: e.target.value}
             }))
         }
@@ -170,10 +172,14 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
-                    ...prevState,
-                    telefon: e.target.value}
+                    imie:prevState.wlasciciel.imie,
+                    mail:prevState.wlasciciel.mail,
+                    telefon: e.target.value
+
+                }
             }))
         }
+        console.log(DataCar)
     }
     function onClickHandler(){
         const formData = new FormData();
