@@ -190,7 +190,6 @@ export default function AddCarPage(){
         else return true
     }
 
-    const [id, setid] = useState([])
     function onClickHandler(e){
 
         const formData = new FormData();
@@ -200,20 +199,15 @@ export default function AddCarPage(){
         formData.append('images', files.image4);
         formData.append('images', files.image5);
         formData.append('images', files.image6);
+        formData.append('ogloszenie', JSON.stringify(DataCar))
 
-
-        axios.post("http://localhost:8080/uploadData", DataCar)
-            .then(res => {
-                setid(res.data)
-            })
-        formData.append('id', id)
-
-        axios.post("http://localhost:8080/uploadImages", formData)
+        axios.post("http://localhost:8080/upload", formData)
             .then(res => {
                 console.log(res.data);
                 alert("File uploaded successfully.")
             })
     }
+
     return(
         <div>
             <form >
