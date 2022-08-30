@@ -62,10 +62,10 @@ export default function AddCarPage(){
             })},[dataModelSelected])
 
 
-
+    const [disabledButton, setdisabledButton] = useState(true)
     function onFileChangeHandler(e) {
         const name = e.target.name
-        e.preventDefault();
+
         if (name === 'zdjecie1') {
             setfiles(prevState =>({
                 ...prevState,
@@ -179,11 +179,20 @@ export default function AddCarPage(){
                 }
             }))
         }
-        console.log(DataCar)
+
+    }
+    function disable(){
+        if(files.image1 && files.image2 && files.image3 && files.image4 && files.image5 && files.image6
+            && DataCar.przebieg && DataCar.rok && DataCar.pojemnosc && DataCar.miejscowosc && DataCar.cena
+            && DataCar.moc && DataCar.kolor && DataCar.spalanie && DataCar.wlasciciel.imie && DataCar.wlasciciel.mail &&
+            DataCar.wlasciciel.telefon && DataCar.stan && DataCar.marka.nazwa && DataCar.paliwo.rodzaj && DataCar.model.nazwa
+            && DataCar.generacja.nazwa && DataCar.nadwozie.typ)  return false
+        else return true
     }
 
+    const [id, setid] = useState([])
+    function onClickHandler(e){
 
-    function onClickHandler(){
         const formData = new FormData();
         formData.append('images', files.image1);
         formData.append('images', files.image2);
@@ -195,20 +204,16 @@ export default function AddCarPage(){
 
         axios.post("http://localhost:8080/uploadData", DataCar)
             .then(res => {
+                setid(res.data)
+            })
+        formData.append('id', id)
+
+        axios.post("http://localhost:8080/uploadImages", formData)
+            .then(res => {
+                console.log(res.data);
                 alert("File uploaded successfully.")
             })
-
-        // axios.post("http://localhost:8080/uploadImages", formData)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         alert("File uploaded successfully.")
-        //     })
-
-
     }
-
-
-
     return(
         <div>
             <form >
@@ -233,6 +238,7 @@ export default function AddCarPage(){
                     <input type="text" name="telefon" placeholder="Telefon" required minLength="9" maxLength="9" size="10" onChange={onFileChangeHandler}/>
 
                     <Multiselect
+                        isObject={false}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -337,8 +343,7 @@ export default function AddCarPage(){
                         placeholder="Typ nadwozia"
                         singleSelect={true}/>
 
-
-                    <button type="submit" onClick={onClickHandler}>Upload</button>
+                    <button type="submit" disabled={disable()} onClick={onClickHandler}>Upload</button>
                 </div>
             </form>
         </div>
