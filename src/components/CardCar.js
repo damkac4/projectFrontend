@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import navlogo from "../images/nav.png"
 export default function CardCar(props){
 
     return(
@@ -6,14 +7,16 @@ export default function CardCar(props){
         <div className="card">
             <img src={require(`../images/ogloszenia/${props.id}/1.png`)}className="card-image"/>
             <div className="card-description">
-                <p>Nadwozie: {props.nadwozie.typ}</p>
-                <p>Rok produkcji: {props.rok}</p>
-                <p>Model: {props.model.nazwa}</p>
-                <p>Marka: {props.marka.nazwa}</p>
-                <p>Generacja: {props.generacja.nazwa}</p>
-                <p>Cena: {props.cena}</p>
-                <p>Paliwo: {props.paliwo.rodzaj}</p>
-                {/*<p>Pojemność: {props.pojemnosc}</p>*/}
+
+
+                <h1>{props.marka.nazwa} {props.model.nazwa} {props.generacja.nazwa}</h1>
+                <h1 className="cena">{props.cena} PLN</h1>
+                <p> {props.rok} • {props.przebieg} km • {props.pojemnosc} cm3 • {props.paliwo.rodzaj}</p>
+
+                <img src={navlogo} width="20px"/>
+                <span> {props.wlasciciel.miejscowosc} ({props.wlasciciel.wojewodztwo})</span>
+
+
             </div>
         </div>
         </Link>

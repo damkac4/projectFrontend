@@ -11,18 +11,21 @@ export default function AddCarPage(){
         id:0,
         generacja: {id: 1, nazwa: ''},
         marka: {id: 1, nazwa: '', kraj:''},
-        miejscowosc: "",
+
         model: {id: 1, nazwa: ''},
         nadwozie: {id: 1, typ: ''},
         paliwo: {id: 1, rodzaj: ''},
         pojemnosc: 0,
         przebieg: 0,
         rok: 0,
-        wlasciciel: {id:0, mail:'', telefon:'', imie:''},
+        wlasciciel: {id:0, mail:'', telefon:'', imie:'', miejscowosc: '', wojewodztwo: ''},
         moc:0,
         kolor:'',
         stan:'',
-        spalanie:0
+        skrzynia:'',
+        spalanie:0,
+        bezwypadkowy:'',
+        naped:''
     })
     const [dataNadwozie, setdataNadwozie] = useState([])
     useEffect(function () {
@@ -62,7 +65,6 @@ export default function AddCarPage(){
             })},[dataModelSelected])
 
 
-    const [disabledButton, setdisabledButton] = useState(true)
     function onFileChangeHandler(e) {
         const name = e.target.name
 
@@ -120,12 +122,7 @@ export default function AddCarPage(){
                 pojemnosc: e.target.value
             }))
         }
-        if(name ==='miejscowosc'){
-            setDataCar(prevState =>({
-                ...prevState,
-                miejscowosc: e.target.value
-            }))
-        }
+
         if(name ==='cena'){
             setDataCar(prevState =>({
                 ...prevState,
@@ -150,10 +147,23 @@ export default function AddCarPage(){
                 spalanie: e.target.value
             }))
         }
+        if(name ==='miejscowosc'){
+            setDataCar(prevState =>({
+                ...prevState,
+                wlasciciel:{
+                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                    miejscowosc: e.target.value,
+                    telefon: prevState.wlasciciel.telefon,
+                    mail: prevState.wlasciciel.mail,
+                    imie: prevState.wlasciciel.imie}
+            }))
+        }
         if(name ==='wlasciciel'){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
+                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                    miejscowosc: prevState.wlasciciel.miejscowosc,
                     telefon: prevState.wlasciciel.telefon,
                     mail: prevState.wlasciciel.mail,
                     imie: e.target.value}
@@ -163,6 +173,8 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
+                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                    miejscowosc: prevState.wlasciciel.miejscowosc,
                     imie:prevState.wlasciciel.imie,
                     telefon: prevState.wlasciciel.telefon,
                     mail: e.target.value}
@@ -172,6 +184,8 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 wlasciciel:{
+                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                    miejscowosc: prevState.wlasciciel.miejscowosc,
                     imie:prevState.wlasciciel.imie,
                     mail:prevState.wlasciciel.mail,
                     telefon: e.target.value
@@ -181,13 +195,22 @@ export default function AddCarPage(){
         }
 
     }
+    const [pol, setpol] = useState("Wymagane wszystkie pola!");
+
     function disable(){
         if(files.image1 && files.image2 && files.image3 && files.image4 && files.image5 && files.image6
-            && DataCar.przebieg && DataCar.rok && DataCar.pojemnosc && DataCar.miejscowosc && DataCar.cena
+            && DataCar.przebieg && DataCar.rok && DataCar.pojemnosc &&  DataCar.cena
             && DataCar.moc && DataCar.kolor && DataCar.spalanie && DataCar.wlasciciel.imie && DataCar.wlasciciel.mail &&
-            DataCar.wlasciciel.telefon && DataCar.stan && DataCar.marka.nazwa && DataCar.paliwo.rodzaj && DataCar.model.nazwa
-            && DataCar.generacja.nazwa && DataCar.nadwozie.typ)  return false
-        else return true
+            DataCar.wlasciciel.telefon && DataCar.wlasciciel.miejscowosc && DataCar.wlasciciel.wojewodztwo &&
+            DataCar.stan && DataCar.marka.nazwa && DataCar.paliwo.rodzaj && DataCar.model.nazwa
+            && DataCar.generacja.nazwa && DataCar.nadwozie.typ && DataCar.skrzynia && DataCar.bezwypadkowy && DataCar.naped) {
+            if(pol==="Wymagane wszystkie pola!") setpol("")
+            return false
+        }
+        else{
+            if(pol==="")setpol("Wymagane wszystkie pola!");
+            return true
+        }
     }
 
     function onClickHandler(e){
@@ -209,28 +232,115 @@ export default function AddCarPage(){
     }
 
     return(
-        <div>
-            <form >
+        <div className="addcar">
+            <form>
+
                 <div>
-                    <input type="file" name="zdjecie1" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
-                    <input type="file" name="zdjecie2" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
-                    <input type="file" name="zdjecie3" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
-                    <input type="file" name="zdjecie4" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
-                    <input type="file" name="zdjecie5" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
-                    <input type="file" name="zdjecie6" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <h2>Zdjęcia</h2>
+                    <div className="addcar-photos">
+                    <input className="input" type="file" name="zdjecie1" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <input className="input" type="file" name="zdjecie2" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <input className="input" type="file" name="zdjecie3" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <input className="input" type="file" name="zdjecie4" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <input className="input" type="file" name="zdjecie5" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    <input className="input" type="file" name="zdjecie6" accept="image/png, image/jpeg" onChange={onFileChangeHandler}/>
+                    </div>
+                </div>
 
-                    <input type="number" name="przebieg" placeholder="Przebieg" required min="1" max="1000000" size="10" onChange={onFileChangeHandler} />
-                    <input type="number" name="rok" placeholder="Rok" required min="1" max="2022" size="10" onChange={onFileChangeHandler}/>
-                    <input type="number" name="pojemnosc" placeholder="Pojemność" required min="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="text" name="miejscowosc" placeholder="Miejscowość" required minLength="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="number" name="cena" placeholder="Cena"  required min="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="number" name="moc" placeholder="Moc" required min="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="text" name="kolor" placeholder="Kolor" required minLength="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="number" name="spalanie" placeholder="Spalanie" required minLength="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="text" name="wlasciciel" placeholder="Imię" required minLength="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="text" name="mail" placeholder="Adres mail" required minLength="1" size="10" onChange={onFileChangeHandler}/>
-                    <input type="text" name="telefon" placeholder="Telefon" required minLength="9" maxLength="9" size="10" onChange={onFileChangeHandler}/>
+                <div>
+                    <h2>Dane pojazdu</h2>
+                    <div className="addcar-details">
+                        <Multiselect
+                            displayValue="typ"
+                            onRemove={function noRefCheck(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    nadwozie: null}) )}}
+                            onSelect={function handleSelect(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    nadwozie: e[0]}))}}
+                            options={dataNadwozie}
+                            placeholder="Typ nadwozia"
+                            singleSelect={true}/>
 
+                        <Multiselect
+                            displayValue="nazwa"
+                            onRemove={function noRefCheck(e){
+                                setdataMarkaSelected(e)
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    marka: null,
+                                    model: null,
+                                    generacja: null}) )
+                                setIsDisabledModel(true)
+                                setIsDisabledGeneracja(true)}}
+                            onSelect={function noRefCheck(e){
+                                setdataMarkaSelected(e)
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    marka: e[0]}) )
+                                setIsDisabledModel(false)}}
+                            options={dataMarka}
+                            singleSelect={true}
+                            disable={isDisabledMarka}
+                            showCheckbox
+                            placeholder="Marka pojazdu"/>
+
+                        <Multiselect
+                            displayValue="nazwa"
+                            onRemove={function noRefCheck(e){
+                                setdataModelSelected(e);
+                                setIsDisabledMarka(false);
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    model: null,
+                                    generacja: null}) )
+                                setIsDisabledGeneracja(true)}}
+                            onSelect={function noRefCheck(e){
+                                setdataModelSelected(e);
+                                setIsDisabledMarka(true);
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    model: e[0]}))
+                                setIsDisabledGeneracja(false)}}
+                            options={dataModel}
+                            disable={isDisabledModel}
+                            singleSelect={true}
+                            placeholder="Model pojazdu"/>
+
+                        <Multiselect
+                            displayValue="nazwa"
+                            onRemove={function noRefCheck(){
+                                setIsDisabledModel(false)
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    generacja: null}))}}
+                            onSelect={function noRefCheck(e){
+                                setIsDisabledModel(true)
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    generacja:e[0]
+                                }) )}}
+                            options={dataGeneracja}
+                            disable={isDisabledGeneracja}
+                            showCheckbox
+                            singleSelect={true}
+                            placeholder="Generacja"/>
+
+                        <Multiselect
+                            isObject={false}
+                            onRemove={function noRefCheck(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    bezwypadkowy: null}) )}}
+                            onSelect={function handleSelect(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    bezwypadkowy: e[0]}))}}
+                            options={["Tak","Nie"]}
+                            placeholder="Bezwypadkowy"
+                            singleSelect={true}/>
                     <Multiselect
                         isObject={false}
                         onRemove={function noRefCheck(e){
@@ -246,27 +356,34 @@ export default function AddCarPage(){
                         singleSelect={true}/>
 
                     <Multiselect
-                        displayValue="nazwa"
+                        isObject={false}
                         onRemove={function noRefCheck(e){
-                            setdataMarkaSelected(e)
                             setDataCar(prevState =>({
                                 ...prevState,
-                                marka: null,
-                                model: null,
-                                generacja: null}) )
-                            setIsDisabledModel(true)
-                            setIsDisabledGeneracja(true)}}
-                        onSelect={function noRefCheck(e){
-                            setdataMarkaSelected(e)
+                                kolor: null}) )}}
+                        onSelect={function handleSelect(e){
                             setDataCar(prevState =>({
                                 ...prevState,
-                                marka: e[0]}) )
-                            setIsDisabledModel(false)}}
-                        options={dataMarka}
-                        singleSelect={true}
-                        disable={isDisabledMarka}
-                        showCheckbox
-                        placeholder="Marka pojazdu"/>
+                                kolor: e[0]}))}}
+                        options={["Biały","Czarny","Granatowy", "Czerwony", "Szary", "Srebrny"]}
+                        placeholder="Kolor"
+                        singleSelect={true}/>
+
+                    <Multiselect
+                        isObject={false}
+                        onRemove={function noRefCheck(e){
+                            setDataCar(prevState =>({
+                                ...prevState,
+                                skrzynia: null}) )}}
+                        onSelect={function handleSelect(e){
+                            setDataCar(prevState =>({
+                                ...prevState,
+                                skrzynia: e[0]}))}}
+                        options={["Manualna","Automatyczna"]}
+                        placeholder="Skrzynia biegów"
+                        singleSelect={true}/>
+
+
 
                     <Multiselect
                         displayValue="rodzaj"
@@ -282,66 +399,73 @@ export default function AddCarPage(){
                         placeholder="Rodzaj paliwa"
                         singleSelect={true}/>
 
-                    <Multiselect
-                        displayValue="nazwa"
-                        onRemove={function noRefCheck(e){
-                            setdataModelSelected(e);
-                            setIsDisabledMarka(false);
-                            setDataCar(prevState =>({
-                                ...prevState,
-                                model: null,
-                                generacja: null}) )
-                            setIsDisabledGeneracja(true)}}
-                        onSelect={function noRefCheck(e){
-                            setdataModelSelected(e);
-                            setIsDisabledMarka(true);
-                            setDataCar(prevState =>({
-                                ...prevState,
-                                model: e[0]}))
-                            setIsDisabledGeneracja(false)}}
-                        options={dataModel}
-                        disable={isDisabledModel}
-                        singleSelect={true}
-                        placeholder="Model pojazdu"/>
+                        <Multiselect
+                            isObject={false}
+                            onRemove={function noRefCheck(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    naped: null}) )}}
+                            onSelect={function handleSelect(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    naped: e[0]}))}}
+                            options={["Na przednie koła","Na tylne koła","4x4"]}
+                            placeholder="Napęd"
+                            singleSelect={true}/>
 
-                    <Multiselect
-                        displayValue="nazwa"
-                        onRemove={function noRefCheck(){
-                            setIsDisabledModel(false)
-                            setDataCar(prevState =>({
-                                ...prevState,
-                                generacja: null}))}}
-                        onSelect={function noRefCheck(e){
-                            setIsDisabledModel(true)
-                            setDataCar(prevState =>({
-                                ...prevState,
-                                generacja:e[0]
-                            }) )}}
-                        options={dataGeneracja}
-                        disable={isDisabledGeneracja}
-                        showCheckbox
-                        singleSelect={true}
-                        placeholder="Generacja"/>
+                        <input type="number" name="przebieg" placeholder="Przebieg"  size="10" onChange={onFileChangeHandler} />
+                        <input type="number" name="rok" placeholder="Rok" size="10" onChange={onFileChangeHandler}/>
 
+
+                        <input type="number" name="pojemnosc" placeholder="Pojemność [cm3]" size="10" onChange={onFileChangeHandler}/>
+                        <input type="number" name="cena" placeholder="Cena" size="10" onChange={onFileChangeHandler}/>
+                        <input type="number" name="moc" placeholder="Moc [KM]" size="10" onChange={onFileChangeHandler}/>
+                        <input type="number" name="spalanie" placeholder="Spalanie [l/100km]" size="10" onChange={onFileChangeHandler}/>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Dane właściciela</h2>
+                <div className="addcar-owner">
+                    <input type="text" name="wlasciciel" placeholder="Osoba kontaktowa" size="10" onChange={onFileChangeHandler}/>
+                    <input type="text" name="mail" placeholder="Adres mail"  size="10" onChange={onFileChangeHandler}/>
+                    <input type="number" name="telefon" placeholder="Telefon"  size="10" onChange={onFileChangeHandler}/>
+                    <input type="text" name="miejscowosc" placeholder="Miejscowość" size="10" onChange={onFileChangeHandler}/>
                     <Multiselect
-                        displayValue="typ"
+                        isObject={false}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
-                                nadwozie: null}) )}}
+                                wlasciciel:{
+                                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                                    miejscowosc: null,
+                                    telefon: prevState.wlasciciel.telefon,
+                                    mail: prevState.wlasciciel.mail,
+                                    imie: prevState.wlasciciel.imie}
+                            }))}}
                         onSelect={function handleSelect(e){
                             setDataCar(prevState =>({
                                 ...prevState,
-                                nadwozie: e[0]}))}}
-                        options={dataNadwozie}
-                        placeholder="Typ nadwozia"
+                                wlasciciel:{
+                                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                                    miejscowosc: e[0],
+                                    telefon: prevState.wlasciciel.telefon,
+                                    mail: prevState.wlasciciel.mail,
+                                    imie: prevState.wlasciciel.imie}
+                            }))}}
+                        options={["Dolnośląskie","Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Łódzkie", "Małopolskie",
+                            "Mazowieckie", "Opolskie", "Podkarpackie", "Podlaskie", "Pomorskie", "Śląskie", "Świętokrzyskie",
+                            "Warmińsko-mazurskie", "Wielkopolskie", "Zachodniopomorskie"]}
+                        placeholder="Województwo"
                         singleSelect={true}/>
-
-                    <button type="submit" disabled={disable()} onClick={onClickHandler}>Upload</button>
                 </div>
+                </div>
+                    <button type="submit " className="addcar-button" disabled={disable()} onClick={onClickHandler}>Dodaj ogłoszenie</button>
+                <span className="span">{pol}</span>
             </form>
         </div>
     )
+
 
 
 

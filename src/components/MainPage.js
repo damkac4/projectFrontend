@@ -19,7 +19,7 @@ export default function MainPage(){
         return (<CardCar
             key = {item.id}
             id = {item.id}
-            nadwozie = {item.nadwozie}
+            wlasciciel = {item.wlasciciel}
             marka = {item.marka}
             model = {item.model}
             generacja = {item.generacja}
