@@ -334,7 +334,7 @@ return(
 
         />
     </form>
-        <p className="amount-cards">Znaleziono - {dataCar.length}</p>
+        <h3 className="amount-cards">Znaleziono - {dataCar.length}</h3>
         <section className="car-list">
             {cards}
         </section>

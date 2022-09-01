@@ -9,7 +9,7 @@ export default function CardCar(props){
             <div className="card-description">
 
 
-                <h1>{props.marka.nazwa} {props.model.nazwa} {props.generacja.nazwa}</h1>
+                <h1>{props.marka.nazwa} {props.model.nazwa} {(props.generacja.nazwa).split('(')[0]}</h1>
                 <h1 className="cena">{(props.cena).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} PLN</h1>
                 <p> {props.rok} • {(props.przebieg).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} km • {props.pojemnosc} cm3 • {props.paliwo.rodzaj}</p>
 

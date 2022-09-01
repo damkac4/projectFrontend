@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: #E2E2E2;
 
+
 }
 @media (prefers-reduced-motion: no-preference){
     .nav-logo {
@@ -23,9 +24,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
-
-
 
 nav{
     height: 70px;
@@ -44,12 +42,15 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px;
+    height: 60px;
     box-shadow: 0px 2.98256px 7.4564px rgba(0,0,0,0.8);
     bottom: 0;
     width: 100%;
     margin-top: 80px;
     background-color: white;
+    position: fixed;
+    z-index: 10000;
+
 }
 
 
@@ -138,6 +139,9 @@ footer{
     margin-left: 60px;
     margin-top: 20px;
     min-height: 500px;
+}
+.div-form{
+    margin-bottom: 100px;
 }
 .amount-cards{
     margin-left: 80px;
@@ -365,7 +369,8 @@ footer{
     margin-right: 10px;
 }
 .span-lower{
-    color: #4169E1;
+    color: #2871cc;
+    font-weight: bold;
 
 }
 .addcar{
@@ -373,6 +378,7 @@ footer{
     flex-direction: row;
     margin:30px;
     align-items: center;
+    margin-bottom: 180px;
 }
 .addcar-photos{
     background-color: white;
@@ -429,3 +435,10 @@ footer{
     opacity: 0.7;
     cursor: default;
   }
+
+.addedCar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

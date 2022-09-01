@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Multiselect} from "multiselect-react-dropdown";
@@ -11,7 +11,6 @@ export default function AddCarPage(){
         id:0,
         generacja: {id: 1, nazwa: ''},
         marka: {id: 1, nazwa: '', kraj:''},
-
         model: {id: 1, nazwa: ''},
         nadwozie: {id: 1, typ: ''},
         paliwo: {id: 1, rodzaj: ''},
@@ -193,7 +192,6 @@ export default function AddCarPage(){
                 }
             }))
         }
-
     }
     const [pol, setpol] = useState("Wymagane wszystkie pola!");
 
@@ -213,6 +211,7 @@ export default function AddCarPage(){
         }
     }
 
+    const [id, setid] = useState()
     function onClickHandler(e){
 
         const formData = new FormData();
@@ -227,6 +226,7 @@ export default function AddCarPage(){
         axios.post("http://localhost:8080/upload", formData)
             .then(res => {
                 console.log(res.data);
+                setid(res.data)
                 alert("File uploaded successfully.")
             })
     }
@@ -382,9 +382,6 @@ export default function AddCarPage(){
                         options={["Manualna","Automatyczna"]}
                         placeholder="Skrzynia biegów"
                         singleSelect={true}/>
-
-
-
                     <Multiselect
                         displayValue="rodzaj"
                         onRemove={function noRefCheck(){
@@ -415,8 +412,6 @@ export default function AddCarPage(){
 
                         <input type="number" name="przebieg" placeholder="Przebieg"  size="10" onChange={onFileChangeHandler} />
                         <input type="number" name="rok" placeholder="Rok" size="10" onChange={onFileChangeHandler}/>
-
-
                         <input type="number" name="pojemnosc" placeholder="Pojemność [cm3]" size="10" onChange={onFileChangeHandler}/>
                         <input type="number" name="cena" placeholder="Cena" size="10" onChange={onFileChangeHandler}/>
                         <input type="number" name="moc" placeholder="Moc [KM]" size="10" onChange={onFileChangeHandler}/>
@@ -437,8 +432,8 @@ export default function AddCarPage(){
                             setDataCar(prevState =>({
                                 ...prevState,
                                 wlasciciel:{
-                                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
-                                    miejscowosc: null,
+                                    wojewodztwo: null,
+                                    miejscowosc: prevState.wlasciciel.miejscowosc,
                                     telefon: prevState.wlasciciel.telefon,
                                     mail: prevState.wlasciciel.mail,
                                     imie: prevState.wlasciciel.imie}
@@ -447,8 +442,8 @@ export default function AddCarPage(){
                             setDataCar(prevState =>({
                                 ...prevState,
                                 wlasciciel:{
-                                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
-                                    miejscowosc: e[0],
+                                    wojewodztwo:e[0] ,
+                                    miejscowosc: prevState.wlasciciel.miejscowosc,
                                     telefon: prevState.wlasciciel.telefon,
                                     mail: prevState.wlasciciel.mail,
                                     imie: prevState.wlasciciel.imie}
@@ -460,13 +455,11 @@ export default function AddCarPage(){
                         singleSelect={true}/>
                 </div>
                 </div>
+                 <Link to={`/added/${id}`} className="text-link">
                     <button type="submit " className="addcar-button" disabled={disable()} onClick={onClickHandler}>Dodaj ogłoszenie</button>
+                 </Link>
                 <span className="span">{pol}</span>
             </form>
         </div>
     )
-
-
-
-
 }

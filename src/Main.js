@@ -13,7 +13,7 @@ export default function Main(){
             <Route exact path='/' element={<MainPage/>}/>
             <Route exact path='/:carId'  element={<Car/>}/>
             <Route exact path='/add'  element={<AddCar/>}/>
-            <Route exact path='/added'  element={<AddedCar/>}/>
+            <Route exact path='/added/:carId'  element={<AddedCar/>}/>
         </Routes>
     );
 }
