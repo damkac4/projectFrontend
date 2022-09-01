@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Multiselect} from "multiselect-react-dropdown";
+import AddCarPageAdded from "./AddCarPageAdded";
 
 export default function AddCarPage(){
 
     const [files, setfiles] = useState([])
+    const [added, setAdded] = useState(false)
     const [DataCar, setDataCar] = useState({
         cena: 0,
         id:0,
@@ -212,7 +213,7 @@ export default function AddCarPage(){
     }
 
     const [id, setid] = useState()
-    function onClickHandler(e){
+    function onClickHandler(){
 
         const formData = new FormData();
         formData.append('images', files.image1);
@@ -229,12 +230,18 @@ export default function AddCarPage(){
                 setid(res.data)
                 alert("File uploaded successfully.")
             })
+        setAdded(true);
     }
 
+
+    if(added) {
+        return <AddCarPageAdded
+            id = {id}
+        />
+    }
     return(
         <div className="addcar">
             <form>
-
                 <div>
                     <h2>Zdjęcia</h2>
                     <div className="addcar-photos">
@@ -455,9 +462,7 @@ export default function AddCarPage(){
                         singleSelect={true}/>
                 </div>
                 </div>
-                 <Link to={`/added/${id}`} className="text-link">
                     <button type="submit " className="addcar-button" disabled={disable()} onClick={onClickHandler}>Dodaj ogłoszenie</button>
-                 </Link>
                 <span className="span">{pol}</span>
             </form>
         </div>

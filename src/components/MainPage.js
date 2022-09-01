@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Multiselect} from "multiselect-react-dropdown";
 import axios from "axios";
-import CardCar from "./CardCar";
+import MainPageCardCar from "./MainPageCardCar";
 
 
 export default function MainPage(){
@@ -16,7 +16,7 @@ export default function MainPage(){
     const [dataCar, setdataCar] = useState([])
 
     const cards = dataCar.map(item =>{
-        return (<CardCar
+        return (<MainPageCardCar
             key = {item.id}
             id = {item.id}
             wlasciciel = {item.wlasciciel}

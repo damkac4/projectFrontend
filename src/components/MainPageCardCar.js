@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import navlogo from "../images/nav.png"
-export default function CardCar(props){
+export default function MainPageCardCar(props){
 
     return(
         <Link to={`/${props.id}`} target="_blank" rel="noopener noreferrer" className="text-link">

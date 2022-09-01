@@ -1,10 +1,6 @@
-
 import { Link } from "react-router-dom";
-import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-export default function AddedCarPage(){
-
-    let params = useParams();
+import React from "react";
+export default function AddCarPageAdded(props){
 
     return(
         <div className="addedCar">
@@ -13,11 +9,10 @@ export default function AddedCarPage(){
             <Link to={"/"} className="text-link">
             <button className="addcar-button" >Strona główna</button>
             </Link>
-        <Link to={`/${params.carId}`} className="text-link">
+        <Link to={`/${props.id}`} className="text-link">
             <button className="addcar-button" >Pokaż ogłoszenie</button>
         </Link>
             </div>
-
         </div>
     )
 }
