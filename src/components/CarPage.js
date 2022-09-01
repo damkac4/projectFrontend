@@ -1,6 +1,8 @@
 
 import {useParams} from "react-router-dom";
 import navlogo from "../images/nav.png"
+import phone from "../images/phone.png"
+import email from "../images/email.png"
 import React, {useEffect, useState} from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -94,26 +96,36 @@ export default function CarPage(){
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper">{thumbImages}</Swiper>
 
-            <span className="span-dodano">Dodano: {JSON.parse(JSON.stringify(dataCar.godzina))}, {JSON.parse(JSON.stringify(dataCar.data))}  ID:
-                {JSON.parse(JSON.stringify(dataCar.id))}
+            <span className="span-dodano">Dodano: {(JSON.parse(JSON.stringify(dataCar.godzina))).toString().slice(0, 5)}, {JSON.parse(JSON.stringify(dataCar.data))} ⠀ ID: {JSON.parse(JSON.stringify(dataCar.id))}
             </span>
             <span> </span>
         </div>
             <div className="upper-data-upper">
                 <div>
                 <h1>{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))} { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</h1>
-                    <p> {JSON.parse(JSON.stringify(dataCar.rok))} • { JSON.parse(JSON.stringify(dataCar.przebieg))} km • {JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))} • {JSON.parse(JSON.stringify(dataCar.nadwozie.typ))} </p>
+                    <p className="upper-details"> {JSON.parse(JSON.stringify(dataCar.rok))} • { (JSON.parse(JSON.stringify(dataCar.przebieg))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} km • {JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))} • {JSON.parse(JSON.stringify(dataCar.nadwozie.typ))} </p>
 
                 </div>
-                <h1 className="cena">{ JSON.parse(JSON.stringify(dataCar.cena))} PLN</h1>
+                <h1 className="cena">{ (JSON.parse(JSON.stringify(dataCar.cena))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} PLN</h1>
                 <hr />
                 <div className="upper-data-lower">
+                    <div className="person">
                     <h2>{JSON.parse(JSON.stringify(dataCar.wlasciciel.imie))}</h2>
-                    <p>{JSON.parse(JSON.stringify(dataCar.wlasciciel.mail))}</p>
-                    <p>{JSON.parse(JSON.stringify(dataCar.wlasciciel.telefon))}</p>
-                    <img src={navlogo} width="20px"/>
-                    <span> { JSON.parse(JSON.stringify(dataCar.wlasciciel.miejscowosc))}, { JSON.parse(JSON.stringify(dataCar.wlasciciel.wojewodztwo))}</span>
-                    <p></p>
+                    </div>
+                    <div className="email">
+                        <img src={email} width="30px"/><p>⠀{JSON.parse(JSON.stringify(dataCar.wlasciciel.mail))}</p>
+                    </div>
+
+                    <div className="phone">
+                    <img src={phone} width="30px"/>⠀{(JSON.parse(JSON.stringify(dataCar.wlasciciel.telefon))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+                    </div>
+
+                    <div className="tag">
+                        ‏‏‎ ‎‏‏‎ <img src={navlogo} width="25px"/>
+                    <p> ‏‏‎ ‎‏‏‎ ‎{ JSON.parse(JSON.stringify(dataCar.wlasciciel.miejscowosc))}, { JSON.parse(JSON.stringify(dataCar.wlasciciel.wojewodztwo))}</p>
+                    </div>
+
+
                 </div>
 
             </div>
@@ -128,31 +140,31 @@ export default function CarPage(){
 
             <div className="lower-data">
 
-                    <p>Nadwozie: {JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</p>
-                    <p>Kraj pochodzenia: { JSON.parse(JSON.stringify(dataCar.marka.kraj))}  </p>
-                    <p>Bezwypadkowy: { JSON.parse(JSON.stringify(dataCar.bezwypadkowy))}</p>
-                    <p>Skrzynia biegów: { JSON.parse(JSON.stringify(dataCar.skrzynia))}</p>
+                <p>Nadwozie: <span className="span-lower">{JSON.parse(JSON.stringify(dataCar.nadwozie.typ))}</span></p>
+                    <p>Kraj pochodzenia:<span className="span-lower"> { JSON.parse(JSON.stringify(dataCar.marka.kraj))}</span>  </p>
+                    <p>Bezwypadkowy: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.bezwypadkowy))}</span></p>
+                    <p>Skrzynia biegów: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.skrzynia))}</span></p>
 
 
-                    <p>Marka: { JSON.parse(JSON.stringify(dataCar.marka.nazwa))}</p>
-                    <p>Kolor: { JSON.parse(JSON.stringify(dataCar.kolor))}</p>
-                    <p>Moc: { JSON.parse(JSON.stringify(dataCar.moc))} KM</p>
-                    <p>Spalanie: { JSON.parse(JSON.stringify(dataCar.spalanie))} l/100km</p>
-
-
-
-
-                    <p>Model: { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</p>
-                    <p>Przebieg: { JSON.parse(JSON.stringify(dataCar.przebieg))} km</p>
-                    <p>Pojemność: {JSON.parse(JSON.stringify(dataCar.pojemnosc))} cm3</p>
-                    <p>Stan: {JSON.parse(JSON.stringify(dataCar.stan))}</p>
+                    <p>Marka: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.marka.nazwa))}</span></p>
+                    <p>Kolor: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.kolor))}</span></p>
+                    <p>Moc: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.moc))} KM</span></p>
+                    <p>Spalanie: <span className="span-lower">{ JSON.parse(JSON.stringify(dataCar.spalanie))} l/100km</span></p>
 
 
 
-                    <p>Generacja: { JSON.parse(JSON.stringify(dataCar.generacja.nazwa))}</p>
-                    <p>Rodzaj paliwa: {JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))}</p>
-                    <p>Rok produkcji: {JSON.parse(JSON.stringify(dataCar.rok))}</p>
-                    <p>Napęd: {JSON.parse(JSON.stringify(dataCar.naped))}</p>
+
+                    <p>Model:<span className="span-lower"> { JSON.parse(JSON.stringify(dataCar.model.nazwa))}</span></p>
+                    <p>Przebieg: <span className="span-lower">{ (JSON.parse(JSON.stringify(dataCar.przebieg))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} km</span></p>
+                    <p>Pojemność: <span className="span-lower">{JSON.parse(JSON.stringify(dataCar.pojemnosc))} cm3</span></p>
+                    <p>Stan: <span className="span-lower">{JSON.parse(JSON.stringify(dataCar.stan))}</span></p>
+
+
+
+                    <p>Generacja:<span className="span-lower"> { JSON.parse(JSON.stringify(dataCar.generacja.nazwa))}</span></p>
+                    <p>Rodzaj paliwa:<span className="span-lower"> {JSON.parse(JSON.stringify(dataCar.paliwo.rodzaj))}</span></p>
+                    <p>Rok produkcji:<span className="span-lower"> {JSON.parse(JSON.stringify(dataCar.rok))}</span></p>
+                    <p>Napęd: <span className="span-lower">{JSON.parse(JSON.stringify(dataCar.naped))}</span></p>
 
 
         </div>

@@ -140,7 +140,7 @@ footer{
     min-height: 500px;
 }
 .amount-cards{
-    margin-left: 60px;
+    margin-left: 80px;
     margin-top: 50px;
     font-size: 20px;
 
@@ -280,7 +280,7 @@ footer{
 .upper{
     display: flex;
     margin-left: 100px;
-
+    min-width: 900px;
     margin-bottom: 50px;
     width: 85%;
     pading: 100px;
@@ -290,18 +290,47 @@ footer{
 
 }
 .upper-data-upper{
-    margin-left: 150px;
+    margin-left: 100px;
     width: 30%;
+    margin-right: 5px;
+}
+.upper-details{
+    font-size: 17px;
 }
 
 .upper-data-lower{
+    display: flex;
+    flex-direction: column;
+
     margin-top: 50px;
-    border: 2px solid black;
+
+    grid-template-rows: repeat(4,50px) ;
+
+    border: 3px solid black;
+    border-radius: 5px;
     height: 50%;
     padding-left: 50px;
+    margin-right: 10px;
     margin-bottom: 50px;
 
 }
+.phone{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.tag{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.email{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
 
 .hr-lower{
     border-width:2px;
@@ -316,22 +345,28 @@ footer{
     background-color: white;
     justify-content: center;
     height: 60%;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 100px;
+    margin-right: 120px;
     border-radius: 10px;
     margin-bottom: 100px;
-
+    min-width: 900px;
 
 }
 .lower-data{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(2,50px) ;
-    grid-row-gap: 14px;
-    grid-column-gap: 130px;
+    grid-row-gap: 12px;
+    grid-column-gap: 120px;
     margin-top: 40px;
     margin-bottom: 40px;
     font-size: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.span-lower{
+    color: #4169E1;
+
 }
 .addcar{
    display: flex;
