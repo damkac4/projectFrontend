@@ -65,6 +65,15 @@ export default function AddCarPage(){
             })},[dataModelSelected])
 
 
+
+
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const [email, setemail] = useState(null);
+    const [number, setnumber] = useState(null);
     function onFileChangeHandler(e) {
         const name = e.target.name
 
@@ -170,32 +179,59 @@ export default function AddCarPage(){
             }))
         }
         if(name ==='mail'){
-            setDataCar(prevState =>({
-                ...prevState,
-                wlasciciel:{
-                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
-                    miejscowosc: prevState.wlasciciel.miejscowosc,
-                    imie:prevState.wlasciciel.imie,
-                    telefon: prevState.wlasciciel.telefon,
-                    mail: e.target.value}
-            }))
+            if(!isValidEmail(e.target.value) && (e.target.value).length !== 0) {
+                setemail("• Mail nieprawidłowy!")
+                setDataCar(prevState => ({
+                    ...prevState,
+                    wlasciciel: {
+                        wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                        miejscowosc: prevState.wlasciciel.miejscowosc,
+                        imie: prevState.wlasciciel.imie,
+                        telefon: prevState.wlasciciel.telefon,
+                        mail: null
+                    }
+                }))
+            }else {
+                setemail(null)
+                setDataCar(prevState => ({
+                    ...prevState,
+                    wlasciciel: {
+                        wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                        miejscowosc: prevState.wlasciciel.miejscowosc,
+                        imie: prevState.wlasciciel.imie,
+                        telefon: prevState.wlasciciel.telefon,
+                        mail: e.target.value
+                    }
+                }))
+            }
         }
         if(name ==='telefon'){
-            setDataCar(prevState =>({
-                ...prevState,
-                wlasciciel:{
-                    wojewodztwo: prevState.wlasciciel.wojewodztwo,
-                    miejscowosc: prevState.wlasciciel.miejscowosc,
-                    imie:prevState.wlasciciel.imie,
-                    mail:prevState.wlasciciel.mail,
-                    telefon: e.target.value
+                if((e.target.value).toString().length === 9 || (e.target.value).toString().length === 0 ) {
+                    setnumber(null)
+                    setDataCar(prevState => ({
+                        ...prevState,
+                        wlasciciel: {
+                            wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                            miejscowosc: prevState.wlasciciel.miejscowosc,
+                            imie: prevState.wlasciciel.imie,
+                            mail: prevState.wlasciciel.mail,
+                            telefon: e.target.value
+                        }
+                    }))
+                } else {
+                    setnumber("• Numer nieprawidłowy!")
+                    setDataCar(prevState => ({
+                        ...prevState,
+                        wlasciciel: {
+                            wojewodztwo: prevState.wlasciciel.wojewodztwo,
+                            miejscowosc: prevState.wlasciciel.miejscowosc,
+                            imie: prevState.wlasciciel.imie,
+                            mail: prevState.wlasciciel.mail,
+                            telefon: null
+                        }}))}}}
 
-                }
-            }))
-        }
-    }
-    const [pol, setpol] = useState("Wymagane wszystkie pola!");
 
+    const [pol, setpol] = useState("• Wymagane wszystkie pola!");
     function disable(){
         if(files.image1 && files.image2 && files.image3 && files.image4 && files.image5 && files.image6
             && DataCar.przebieg && DataCar.rok && DataCar.pojemnosc &&  DataCar.cena
@@ -203,11 +239,11 @@ export default function AddCarPage(){
             DataCar.wlasciciel.telefon && DataCar.wlasciciel.miejscowosc && DataCar.wlasciciel.wojewodztwo &&
             DataCar.stan && DataCar.marka.nazwa && DataCar.paliwo.rodzaj && DataCar.model.nazwa
             && DataCar.generacja.nazwa && DataCar.nadwozie.typ && DataCar.skrzynia && DataCar.bezwypadkowy && DataCar.naped) {
-            if(pol==="Wymagane wszystkie pola!") setpol("")
+            if(pol==="• Wymagane wszystkie pola!") setpol("")
             return false
         }
         else{
-            if(pol==="")setpol("Wymagane wszystkie pola!");
+            if(pol==="")setpol("• Wymagane wszystkie pola!");
             return true
         }
     }
@@ -233,11 +269,9 @@ export default function AddCarPage(){
         setAdded(true);
     }
 
-
     if(added) {
         return <AddCarPageAdded
-            id = {id}
-        />
+            id = {id}/>
     }
     return(
         <div className="addcar">
@@ -461,9 +495,10 @@ export default function AddCarPage(){
                         placeholder="Województwo"
                         singleSelect={true}/>
                 </div>
+
                 </div>
                     <button type="submit " className="addcar-button" disabled={disable()} onClick={onClickHandler}>Dodaj ogłoszenie</button>
-                <span className="span">{pol}</span>
+                <span className="span">{pol}</span> <span className="span"> {number}</span> <span className="span"> {email}</span>
             </form>
         </div>
     )

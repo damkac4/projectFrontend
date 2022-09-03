@@ -124,8 +124,6 @@ export default function CarPage(){
                         ‏‏‎ ‎‏‏‎ <img src={navlogo} width="25px"/>
                     <p> ‏‏‎ ‎‏‏‎ ‎{ JSON.parse(JSON.stringify(dataCar.wlasciciel.miejscowosc))}, { JSON.parse(JSON.stringify(dataCar.wlasciciel.wojewodztwo))}</p>
                     </div>
-
-
                 </div>
 
             </div>

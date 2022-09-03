@@ -317,6 +317,7 @@ footer{
     margin-right: 10px;
     margin-bottom: 50px;
 
+
 }
 .phone{
     display: flex;
@@ -423,7 +424,7 @@ footer{
 }
 
 .span {
-
+    margin-right: 10px;
     color: red;
 }
 .input{
