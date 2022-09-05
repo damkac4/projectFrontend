@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/MainPage"
 import Car from "./components/CarPage"
 import AddCar from "./components/AddCarPage"
-
+import DeleteCar from "./components/DeleteCarPage"
 
 export default function Main(){
 
@@ -12,6 +12,7 @@ export default function Main(){
             <Route exact path='/' element={<MainPage/>}/>
             <Route exact path='/:carId'  element={<Car/>}/>
             <Route exact path='/add'  element={<AddCar/>}/>
+            <Route exact path='/delete/:carId'  element={<DeleteCar/>}/>
         </Routes>
     );
 }

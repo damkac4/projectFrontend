@@ -271,7 +271,9 @@ export default function AddCarPage(){
 
     if(added) {
         return <AddCarPageAdded
-            id = {id}/>
+            id = {id}
+            imie = {DataCar.wlasciciel.imie}
+            mail = {DataCar.wlasciciel.mail}/>
     }
     return(
         <div className="addcar">

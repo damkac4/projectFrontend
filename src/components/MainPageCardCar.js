@@ -15,8 +15,6 @@ export default function MainPageCardCar(props){
 
                 <img src={navlogo} width="20px"/>
                 <span> {props.wlasciciel.miejscowosc} ({props.wlasciciel.wojewodztwo})</span>
-
-
             </div>
         </div>
         </Link>

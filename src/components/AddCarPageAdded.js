@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, {useEffect} from "react";
+import axios from "axios";
 export default function AddCarPageAdded(props){
+
+    useEffect(function () {
+        axios.post(`http://localhost:8080/mail?id=${props.id}&imie=${props.imie}&mail=${props.mail}`)
+            .then()},[props.id]);
+
 
     return(
         <div className="addedCar">
