@@ -7,6 +7,8 @@ export default function AddCarPage(){
 
     const [files, setfiles] = useState([])
     const [added, setAdded] = useState(false)
+    const years = []
+    for(let i = 1970;i < 2023;i++) years.push(i)
     const [DataCar, setDataCar] = useState({
         cena: 0,
         id:0,
@@ -117,12 +119,6 @@ export default function AddCarPage(){
             setDataCar(prevState =>({
                 ...prevState,
                 przebieg: e.target.value
-            }))
-        }
-        if(name ==='rok'){
-            setDataCar(prevState =>({
-                ...prevState,
-                rok: e.target.value
             }))
         }
         if(name ==='pojemnosc'){
@@ -264,7 +260,6 @@ export default function AddCarPage(){
             .then(res => {
                 console.log(res.data);
                 setid(res.data)
-                alert("File uploaded successfully.")
             })
         setAdded(true);
     }
@@ -295,6 +290,7 @@ export default function AddCarPage(){
                     <div className="addcar-details">
                         <Multiselect
                             displayValue="typ"
+                            singleSelect={true}
                             onRemove={function noRefCheck(e){
                                 setDataCar(prevState =>({
                                     ...prevState,
@@ -305,9 +301,10 @@ export default function AddCarPage(){
                                     nadwozie: e[0]}))}}
                             options={dataNadwozie}
                             placeholder="Typ nadwozia"
-                            singleSelect={true}/>
+                           />
 
                         <Multiselect
+                            singleSelect={true}
                             displayValue="nazwa"
                             onRemove={function noRefCheck(e){
                                 setdataMarkaSelected(e)
@@ -325,13 +322,12 @@ export default function AddCarPage(){
                                     marka: e[0]}) )
                                 setIsDisabledModel(false)}}
                             options={dataMarka}
-                            singleSelect={true}
                             disable={isDisabledMarka}
-                            showCheckbox
                             placeholder="Marka pojazdu"/>
 
                         <Multiselect
                             displayValue="nazwa"
+                            singleSelect={true}
                             onRemove={function noRefCheck(e){
                                 setdataModelSelected(e);
                                 setIsDisabledMarka(false);
@@ -349,10 +345,15 @@ export default function AddCarPage(){
                                 setIsDisabledGeneracja(false)}}
                             options={dataModel}
                             disable={isDisabledModel}
-                            singleSelect={true}
                             placeholder="Model pojazdu"/>
 
                         <Multiselect
+                            selectionLimit={1}
+                            style={{
+                                chips: {
+                                    background: 'black'
+                                },
+                            }}
                             displayValue="nazwa"
                             onRemove={function noRefCheck(){
                                 setIsDisabledModel(false)
@@ -367,12 +368,16 @@ export default function AddCarPage(){
                                 }) )}}
                             options={dataGeneracja}
                             disable={isDisabledGeneracja}
-                            showCheckbox
-                            singleSelect={true}
                             placeholder="Generacja"/>
 
                         <Multiselect
                             isObject={false}
+                            selectionLimit={1}
+                            style={{
+                                chips: {
+                                    background: 'black'
+                                },
+                            }}
                             onRemove={function noRefCheck(e){
                                 setDataCar(prevState =>({
                                     ...prevState,
@@ -382,10 +387,15 @@ export default function AddCarPage(){
                                     ...prevState,
                                     bezwypadkowy: e[0]}))}}
                             options={["Tak","Nie"]}
-                            placeholder="Bezwypadkowy"
-                            singleSelect={true}/>
+                            placeholder="Bezwypadkowy"/>
                     <Multiselect
                         isObject={false}
+                        selectionLimit={1}
+                        style={{
+                            chips: {
+                                background: 'black'
+                            },
+                        }}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -395,11 +405,16 @@ export default function AddCarPage(){
                                 ...prevState,
                                 stan: e[0]}))}}
                         options={["Nowy","Używany","Uszkodzony"]}
-                        placeholder="Stan"
-                        singleSelect={true}/>
+                        placeholder="Stan"/>
 
                     <Multiselect
                         isObject={false}
+                        selectionLimit={1}
+                        style={{
+                            chips: {
+                                background: 'black'
+                            },
+                        }}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -408,12 +423,17 @@ export default function AddCarPage(){
                             setDataCar(prevState =>({
                                 ...prevState,
                                 kolor: e[0]}))}}
-                        options={["Biały","Czarny","Granatowy", "Czerwony", "Szary", "Srebrny"]}
-                        placeholder="Kolor"
-                        singleSelect={true}/>
+                        options={["Biały","Czarny","Granatowy", "Czerwony", "Szary", "Srebrny", "Brązowy"]}
+                        placeholder="Kolor"/>
 
                     <Multiselect
                         isObject={false}
+                        selectionLimit={1}
+                        style={{
+                            chips: {
+                                background: 'black'
+                            },
+                        }}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -423,10 +443,15 @@ export default function AddCarPage(){
                                 ...prevState,
                                 skrzynia: e[0]}))}}
                         options={["Manualna","Automatyczna"]}
-                        placeholder="Skrzynia biegów"
-                        singleSelect={true}/>
+                        placeholder="Skrzynia biegów"/>
                     <Multiselect
                         displayValue="rodzaj"
+                        selectionLimit={1}
+                        style={{
+                            chips: {
+                                background: 'black'
+                            },
+                        }}
                         onRemove={function noRefCheck(){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -436,11 +461,16 @@ export default function AddCarPage(){
                                 ...prevState,
                                 paliwo: e[0]}))}}
                         options={dataPaliwo}
-                        placeholder="Rodzaj paliwa"
-                        singleSelect={true}/>
+                        placeholder="Rodzaj paliwa"/>
 
                         <Multiselect
                             isObject={false}
+                            selectionLimit={1}
+                            style={{
+                                chips: {
+                                    background: 'black'
+                                },
+                            }}
                             onRemove={function noRefCheck(e){
                                 setDataCar(prevState =>({
                                     ...prevState,
@@ -450,11 +480,34 @@ export default function AddCarPage(){
                                     ...prevState,
                                     naped: e[0]}))}}
                             options={["Na przednie koła","Na tylne koła","4x4"]}
-                            placeholder="Napęd"
-                            singleSelect={true}/>
+                            placeholder="Napęd"/>
+
+                        <Multiselect
+                            isObject={false}
+                            selectionLimit={1}
+                            style={{
+                                chips: {
+                                    background: 'black'
+                                },
+                            }}
+                            onRemove={function noRefCheck(){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    rok: null
+                                }))
+                            }}
+                            onSelect={function noRefCheck(e){
+                                setDataCar(prevState =>({
+                                    ...prevState,
+                                    rok: parseInt(e)
+                                }))
+                            }}
+                            options={years}
+                            placeholder="Rok produkcji"
+
+                        />
 
                         <input type="number" name="przebieg" placeholder="Przebieg"  size="10" onChange={onFileChangeHandler} />
-                        <input type="number" name="rok" placeholder="Rok" size="10" onChange={onFileChangeHandler}/>
                         <input type="number" name="pojemnosc" placeholder="Pojemność [cm3]" size="10" onChange={onFileChangeHandler}/>
                         <input type="number" name="cena" placeholder="Cena" size="10" onChange={onFileChangeHandler}/>
                         <input type="number" name="moc" placeholder="Moc [KM]" size="10" onChange={onFileChangeHandler}/>
@@ -471,6 +524,12 @@ export default function AddCarPage(){
                     <input type="text" name="miejscowosc" placeholder="Miejscowość" size="10" onChange={onFileChangeHandler}/>
                     <Multiselect
                         isObject={false}
+                        selectionLimit={1}
+                        style={{
+                            chips: {
+                                background: 'black'
+                            },
+                        }}
                         onRemove={function noRefCheck(e){
                             setDataCar(prevState =>({
                                 ...prevState,
@@ -494,8 +553,7 @@ export default function AddCarPage(){
                         options={["Dolnośląskie","Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Łódzkie", "Małopolskie",
                             "Mazowieckie", "Opolskie", "Podkarpackie", "Podlaskie", "Pomorskie", "Śląskie", "Świętokrzyskie",
                             "Warmińsko-mazurskie", "Wielkopolskie", "Zachodniopomorskie"]}
-                        placeholder="Województwo"
-                        singleSelect={true}/>
+                        placeholder="Województwo"/>
                 </div>
 
                 </div>

@@ -119,6 +119,7 @@ footer{
 .card-image {
     width: 250px;
     margin: 20px;
+    border-radius: 4px;
 }
 .card {
     display: flex;
@@ -141,14 +142,16 @@ footer{
     min-height: 500px;
 }
 .div-form{
-    margin-bottom: 100px;
+    margin-bottom: 200px;
+
 }
 .amount-cards{
     margin-left: 80px;
-    margin-top: 50px;
+    margin-top: 70px;
     font-size: 20px;
 
 }
+
 
 .form  {
      display:grid;
@@ -159,12 +162,44 @@ footer{
     margin:5px;
     background-color: white;
     padding: 40px;
-
     border-radius: 5px;
     margin-left: 30px;
     margin-right: 30px;
-
+    min-width: 1000px;
+    max-height: 230px;
  }
+.div-form-sort{
+    width: 220px;
+    margin-left: 100px;
+    background-color: white;
+    margin-top:55px;
+    border-radius: 5px;
+    position: absolute;
+    right: 100px;
+}
+
+.div-form-page{
+    width: 100px;
+    margin-left: 100px;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    position: absolute;
+    right: 100px;
+}
+.strona{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 100px;
+}
+.strona-select{
+    background-color: white;
+    width: 100px;
+    border-radius: 5px;
+    justify-content: right;
+}
+
 .text-link{
     text-decoration: none;
     color: black;
@@ -350,8 +385,8 @@ footer{
     background-color: white;
     justify-content: center;
     height: 60%;
-    margin-left: 100px;
-    margin-right: 120px;
+    margin-left: 80px;
+    margin-right: 100px;
     border-radius: 10px;
     margin-bottom: 100px;
     min-width: 900px;
@@ -394,10 +429,10 @@ footer{
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(4,50px) ;
     grid-gap: 10px;
-    grid-column-gap: 50px;
+    grid-column-gap: 18px;
      background-color: white;
     margin-bottom: 50px;
-    padding: 50px;
+    padding: 40px;
     border-radius: 5px;
  }
 .addcar-owner{

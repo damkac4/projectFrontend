@@ -11,9 +11,11 @@ export default function MainPage(){
     const prices = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000,
         50000, 65000, 80000, 100000, 200000, 500000, 1000000]
     const kms = [20000, 35000, 50000, 75000, 100000, 125000, 150000, 175000, 200000, 250000 ]
-
+    const sortOptions = ["Najnowsze", "Cena: od najniższej", "Cena: od najwyższej", "Przebieg: od najniższego", "Przebieg: od najwyższego"]
 
     const [dataCar, setdataCar] = useState([])
+    const [pages, setPages] = useState([])
+    const [pageSelected, setPageSelected] = useState(["1"])
 
     const cards = dataCar.map(item =>{
         return (<MainPageCardCar
@@ -43,12 +45,27 @@ export default function MainPage(){
         rokDo:2022,
         paliwo:null,
         przebiegOd:0,
-        przebiegDo:1000000
+        przebiegDo:1000000,
+        sort:"Najnowsze"
     })
 
     useEffect(function () {
         axios.post("http://localhost:8080/s", formData)
-            .then(data => setdataCar(data.data))
+            .then(data => {
+                if(formData.sort === "Najnowsze") setdataCar(data.data.sort((a, b) => b.id - a.id))
+                else if(formData.sort === "Cena: od najniższej") setdataCar(data.data.sort((a, b) => a.cena - b.cena))
+                else if(formData.sort === "Cena: od najwyższej") setdataCar(data.data.sort((a, b) => b.cena - a.cena))
+                else if(formData.sort === "Przebieg: od najniższego") setdataCar(data.data.sort((a, b) => a.przebieg - b.przebieg))
+                else if(formData.sort === "Przebieg: od najwyższego") setdataCar(data.data.sort((a, b) => b.przebieg - a.przebieg))
+
+                const page = [];
+                for(let i = 1; i<=Math.ceil(data.data.length / 10); i++){
+                    page.push(i)
+                }
+                setPages(page)
+                setPageSelected("1")
+
+            })
     },[formData]);
 
 
@@ -103,6 +120,12 @@ return(
     <div className="div-form">
     <form className="form">
         <Multiselect
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             displayValue="typ"
             onRemove={function noRefCheck(e){
                 setFormData(prevState =>({
@@ -122,11 +145,11 @@ return(
             }}
             options={dataNadwozie}
             placeholder="Typ nadwozia"
-            singleSelect={true}
 
         />
         <Multiselect
             displayValue="nazwa"
+            singleSelect={true}
             onRemove={function noRefCheck(e){
                 setdataMarkaSelected(e)
                 setFormData(prevState =>({
@@ -148,14 +171,13 @@ return(
             }
             }
             options={dataMarka}
-            singleSelect={true}
             disable={isDisabledMarka}
-            showCheckbox
             placeholder="Marka pojazdu"
         />
 
         <Multiselect
             displayValue="nazwa"
+            singleSelect={true}
             onRemove={function noRefCheck(e){
                 setdataModelSelected(e);
                 setIsDisabledMarka(false);
@@ -178,11 +200,11 @@ return(
             }}
             options={dataModel}
             disable={isDisabledModel}
-            singleSelect={true}
             placeholder="Model pojazdu"
         />
         <Multiselect
             displayValue="nazwa"
+            singleSelect={true}
             onRemove={function noRefCheck(){
                 setIsDisabledModel(false)
                 setFormData(prevState =>({
@@ -200,13 +222,16 @@ return(
             }}
             options={dataGeneracja}
             disable={isDisabledGeneracja}
-            showCheckbox
-            singleSelect={true}
             placeholder="Generacja"
         />
         <Multiselect
             isObject={false}
-
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(){
                 setFormData(prevState =>({
                     ...prevState,
@@ -221,10 +246,15 @@ return(
             }}
             options={prices}
             placeholder="Cena od"
-            singleSelect={true}
         />
         <Multiselect
             isObject={false}
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                }
+            }}
             onRemove={function noRefCheck(e){
                 setFormData(prevState =>({
                     ...prevState,
@@ -237,11 +267,16 @@ return(
             }))}}
             options={prices}
             placeholder="Cena do"
-            singleSelect={true}
         />
 
         <Multiselect
             isObject={false}
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(e){
                 setFormData(prevState =>({
                 ...prevState,
@@ -254,10 +289,15 @@ return(
             }))}}
             options={years}
             placeholder="Rok produkcji od"
-            singleSelect={true}
         />
         <Multiselect
             isObject={false}
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(){
                 setFormData(prevState =>({
                     ...prevState,
@@ -272,11 +312,17 @@ return(
             }}
             options={years}
             placeholder="Rok produkcji do"
-            singleSelect={true}
+
         />
 
         <Multiselect
             displayValue="rodzaj"
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(){
                 setFormData(prevState =>({
                     ...prevState,
@@ -291,11 +337,17 @@ return(
             }}
             options={dataPaliwo}
             placeholder="Rodzaj paliwa"
-            singleSelect={true}
+
         />
 
         <Multiselect
             isObject={false}
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(e){
                 setFormData(prevState =>({
                     ...prevState,
@@ -310,11 +362,17 @@ return(
             }}
             options={kms}
             placeholder="Przebieg od"
-            singleSelect={true}
+
 
         />
         <Multiselect
             isObject={false}
+            selectionLimit={1}
+            style={{
+                chips: {
+                    background: 'black'
+                },
+            }}
             onRemove={function noRefCheck(){
                 setFormData(prevState =>({
                     ...prevState,
@@ -330,14 +388,49 @@ return(
             }}
             options={kms}
             placeholder="Przebieg do"
-            singleSelect={true}
+
 
         />
     </form>
+        <div className="div-form-sort">
+        <Multiselect
+
+            customCloseIcon={<>🍑</>}
+            isObject={false}
+            onSelect={function noRefCheck(e){
+                setFormData(prevState =>({
+                    ...prevState,
+                    sort: e[0]
+                }))
+            }}
+            selectedValues={["Najnowsze"]}
+            options={sortOptions}
+            singleSelect={true}
+
+        />
+        </div>
         <h3 className="amount-cards">Znaleziono - {dataCar.length}</h3>
         <section className="car-list">
-            {cards}
+            {cards.slice((pageSelected-1)*10, (pageSelected*10))}
+
         </section>
+
+        <div className="strona">
+            <p >Strona {pageSelected}</p>
+            <div className="strona-select">
+            <Multiselect
+                customCloseIcon={<>🍑</>}
+                isObject={false}
+                onSelect={function noRefCheck(e){
+                    setPageSelected(e[0])
+                    window.scrollTo(0, 0)
+                }}
+                selectedValues={pageSelected}
+                options={pages}
+                singleSelect={true}
+            />
+            </div>
+        </div>
     </div>
 
 )
